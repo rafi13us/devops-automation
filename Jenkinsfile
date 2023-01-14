@@ -54,7 +54,7 @@ pipeline {
         				sh 'docker push mohammedrafishaik71/devops-automation:latest'
         			}
         		}
-        	}
+
 
         	post {
         		always {
