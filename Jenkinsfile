@@ -14,9 +14,10 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/rafi13us/devops-automation.git'
 
                 // Run Maven on a Unix agent.
-                sh "mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=devopsautomation"
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
-
+                withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+                    sh "mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=devopsautomation"
+                    sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                } 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
