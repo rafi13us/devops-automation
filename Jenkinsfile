@@ -15,10 +15,11 @@ pipeline {
 
                 // Run Maven on a Unix agent.
                 withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
-                    sh "mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=devopsautomation"
+                    sh "mvn clean package verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=devopsautomation"
                     sh "mvn -Dmaven.test.failure.ignore=true clean package"
                 } 
                 sh "docker build -t springio/gs-spring-boot-docker ."
+                sh "docker tag springio/gs-spring-boot-docker mohammedrafishaik71/devops-automation"
                 //docker run -p 8080:8080 springio/gs-spring-boot-docker
                 }
 
