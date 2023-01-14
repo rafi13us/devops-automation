@@ -43,6 +43,7 @@ pipeline {
         				sh 'docker push mohammedrafishaik71/devops-automation:latest'
         			}
         		}
+    }
         	post {
         		always {
         			sh 'docker logout'
@@ -51,4 +52,4 @@ pipeline {
 
 
     }
-}
+
