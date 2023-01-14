@@ -18,9 +18,9 @@ pipeline {
                     sh "mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=devopsautomation"
                     sh "mvn -Dmaven.test.failure.ignore=true clean package"
                 } 
-                // To run Maven on a Windows agent, use
-                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
-            }
+                sh "docker build -t springio/gs-spring-boot-docker ."
+                //docker run -p 8080:8080 springio/gs-spring-boot-docker
+                }
 
             post {
                 // If Maven was able to run the tests, even if some of the test
