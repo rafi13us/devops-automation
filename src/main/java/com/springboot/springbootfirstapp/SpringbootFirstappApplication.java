@@ -11,7 +11,7 @@ public class SpringbootFirstappApplication {
 
 	@GetMapping
 	public String message(){
-		return "Congratulations, successfully deployed using Kubernetes";
+		return "Congratulations, successfully deployed using Kubernetes k*s";
 	}
 		public static void main(String[] args) {
 		SpringApplication.run(SpringbootFirstappApplication.class, args);
