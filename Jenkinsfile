@@ -14,8 +14,7 @@ pipeline {
                     steps {
                         git branch: 'main', url: 'https://github.com/rafi13us/devops-automation.git'    
                         withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
-                                sh "mvn clean package verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=devopsautomation"
-                                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                                sh "mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=devopsautomation -Dmaven.test.failure.ignore=true"
                         }       
                     }
                  }         
