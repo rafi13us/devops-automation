@@ -3,7 +3,6 @@ pipeline {
     agent any
 
     tools {
-        // Install the Maven version configured as "M3" and add it to the path.
         maven "M3"
     }
     environment {
@@ -11,22 +10,15 @@ pipeline {
     	}
 
     stages {
-        stage('Prepare') {
-            steps {
-                // Get some code from a GitHub repository
-                git branch: 'main', url: 'https://github.com/rafi13us/devops-automation.git'
-
-                // Run Maven on a Unix agent.
-                withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
-                    sh "mvn clean package verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=devopsautomation"
-                    sh "mvn -Dmaven.test.failure.ignore=true clean package"
-                } 
-                //sh "docker tag springio/gs-spring-boot-docker mohammedrafishaik71/devops-automation"
-                //docker run -p 8080:8080 springio/gs-spring-boot-docker
-                }
-        }         
-            
-        
+                stage('Prepare') {
+                    steps {
+                        git branch: 'main', url: 'https://github.com/rafi13us/devops-automation.git'    
+                        withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+                                sh "mvn clean package verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=devopsautomation"
+                                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                        }       
+                    }
+                 }         
                 stage('Build') {
         			    steps {
         				    sh "docker build -t mohammedrafishaik71/devops-automation:latest ."
@@ -42,14 +34,13 @@ pipeline {
         			steps {
         				sh 'docker push mohammedrafishaik71/devops-automation:latest'
         			}
-        		}
-    }
-        	post {
-        		always {
-        			sh 'docker logout'
-        		}
-        	}
-
-
+        	
+        	        post {
+        		        always {
+        			       sh 'docker logout'
+        		        }
+        	        }
+                }
+         }
     }
 
