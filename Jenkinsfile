@@ -1,16 +1,5 @@
 pipeline {
     agent any
-    stages {
-      stage('Select Environment to Deploy') {
-steps {
-              script {
-                env.selected_environment = input  message: 'Select environment to Deploy',ok : 'Proceed',id :'tag_id',
-                parameters:[choice(choices: ['DEV', 'QA', 'STAGING', 'PROD'], description: 'Select environment', name: 'env')]
-                echo "Deploying in ${env.selected_environment}."
-}
-         }
-      }
-   }
     tools{
         maven 'M3' 
     }
@@ -39,6 +28,15 @@ steps {
                 }
             }
         }
+         stage('Select Environment to Deploy') {
+             steps {
+              script {
+                env.selected_environment = input  message: 'Select environment to Deploy',ok : 'Proceed',id :'tag_id',
+                parameters:[choice(choices: ['DEV', 'STAGE', 'PROD'], description: 'Select environment', name: 'env')]
+                echo "Deploying in ${env.selected_environment}."
+            }
+         }
+      }
        stage('Dev Deploy'){
             steps{
                 script{
