@@ -1,9 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: Dev
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-boot-k8s-deployment
   labels:
     app: spring-boot-k8s
+  namespace: Dev
 spec:
   selector:
     matchLabels: 
@@ -14,6 +20,7 @@ spec:
       name: spring-boot-k8s-pod
       labels:
         app: spring-boot-k8s
+      namespace: Dev
     spec:
       containers:
         - name: spring-boot-k8s
@@ -27,6 +34,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: springboot-k8s-svc
+  namespace: Dev
 spec:
   selector:
     app: spring-boot-k8s
@@ -35,4 +43,3 @@ spec:
       port: 8080
       targetPort: 8080
   type: NodePort
-
