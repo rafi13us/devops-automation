@@ -54,7 +54,7 @@ pipeline {
        stage('Dev Deploy'){
             steps{
                 script{
-                    sh 'kubectl apply -f https://github.com/rafi13us/devops-automation/deploymentservice-Dev.yaml'
+                    sh 'kubectl apply -f https://github.com/rafi13us/devops-automation.git/deploymentservice-Dev.yaml'
                     //sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-Dev.yaml'
                 }
             }
