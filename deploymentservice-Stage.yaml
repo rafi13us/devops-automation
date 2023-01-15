@@ -1,1 +1,46 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: Stage
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-k8s-deployment
+  labels:
+    app: spring-boot-k8s
+  namespace: Stage
+spec:
+  selector:
+    matchLabels: 
+      app: spring-boot-k8s
+  replicas : 2
+  template:
+    metadata:
+      name: spring-boot-k8s-pod
+      labels:
+        app: spring-boot-k8s
+      namespace: Stage
+    spec:
+      containers:
+        - name: spring-boot-k8s
+          image: mohammedrafishaik71/devops-automation
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-k8s-svc
+  namespace: Stage
+spec:
+  selector:
+    app: spring-boot-k8s
+  ports:
+    - protocol: "TCP"
+      port: 8080
+      targetPort: 8080
+  type: NodePort
 
