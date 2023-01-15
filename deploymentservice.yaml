@@ -2,14 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-boot-k8s-deployment
+  labels:
+    app: spring-boot-k8s
 spec:
   selector:
-    app: spring-boot-k8s
+    matchLabels: 
+      app: spring-boot-k8s
   replicas : 2
   template:
     metadata:
+      name: spring-boot-k8s-pod
       labels:
-        app:
+        app: spring-boot-k8s
     spec:
       containers:
         - name: spring-boot-k8s
