@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: Prod
+  name: prod
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -9,7 +9,7 @@ metadata:
   name: spring-boot-k8s-deployment
   labels:
     app: spring-boot-k8s
-  namespace: Prod
+  namespace: prod
 spec:
   selector:
     matchLabels: 
@@ -20,7 +20,7 @@ spec:
       name: spring-boot-k8s-pod
       labels:
         app: spring-boot-k8s
-      namespace: Prod
+      namespace: prod
     spec:
       containers:
         - name: spring-boot-k8s
@@ -34,7 +34,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: springboot-k8s-svc
-  namespace: Prod
+  namespace: prod
 spec:
   selector:
     app: spring-boot-k8s
