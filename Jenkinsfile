@@ -54,21 +54,21 @@ pipeline {
        stage('Dev Deploy'){
             steps{
                 script{
-                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice.yaml'
+                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-Dev.yaml'
                 }
             }
         }
         stage('Stage Deploy'){
             steps{
                 script{
-                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice.yaml'
+                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-Stage.yaml'
                 }
             }
         }
         stage('Prod Deploy'){
             steps{
                 script{
-                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice.yaml'
+                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-Prod.yaml'
                 }
             }
         }
