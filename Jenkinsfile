@@ -35,5 +35,19 @@ pipeline {
                 }
             }
         }
+        stage('Stage Deploy'){
+            steps{
+                script{
+                    sh 'kubectl apply -f deploymentservice.yaml'
+                }
+            }
+        }
+        stage('Prod Deploy'){
+            steps{
+                script{
+                    sh 'kubectl apply -f deploymentservice.yaml'
+                }
+            }
+        }
     }
 }
