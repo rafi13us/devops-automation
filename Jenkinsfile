@@ -31,21 +31,21 @@ pipeline {
        stage('Dev Deploy'){
             steps{
                 script{
-                    sh 'kubectl apply -f deploymentservice.yaml'
+                    sh 'kubectl apply -f mohammedrafishaik71/devops-automation/deploymentservice.yaml'
                 }
             }
         }
         stage('Stage Deploy'){
             steps{
                 script{
-                    sh 'kubectl apply -f deploymentservice.yaml'
+                    sh 'kubectl apply -f mohammedrafishaik71/devops-automation/deploymentservice.yaml'
                 }
             }
         }
         stage('Prod Deploy'){
             steps{
                 script{
-                    sh 'kubectl apply -f deploymentservice.yaml'
+                    sh 'kubectl apply -f mohammedrafishaik71/devops-automation/deploymentservice.yaml'
                 }
             }
         }
