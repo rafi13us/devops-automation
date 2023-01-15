@@ -31,7 +31,7 @@ pipeline {
        stage('Dev Deploy'){
             steps{
                 script{
-                    sh 'kubectl get node'
+                    sh 'kubectl apply -f deploymentservice.yaml'
                 }
             }
         }
