@@ -54,7 +54,7 @@ pipeline {
        stage(' Deploying in selected environment'){
             steps{
                 script{
-                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-${env.selected_environment}.yaml'
+                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-"${env.selected_environment}".yaml'
                 }
             }
         }
