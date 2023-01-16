@@ -48,16 +48,17 @@ pipeline {
                 env.selected_environment = input  message: 'Select environment to Deploy',ok : 'Proceed',id :'tag_id',
                 parameters:[choice(choices: ['Dev', 'Stage', 'Prod'], description: 'Select environment', name: 'env')]
                 echo "Deploying in ${env.selected_environment}."
+                sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-"${env.selected_environment}".yaml'
             }
          }
       }
-       stage(' Deploying in selected environment'){
-            steps{
-                script{
-                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-"${env.selected_environment}".yaml'
-                }
-            }
-        }
+//        stage(' Deploying in selected environment'){
+//             steps{
+//                 script{
+//                     sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-"${env.selected_environment}".yaml'
+//                 }
+//           }
+//        }
 //         stage('Stage Deploy'){
 //             steps{
 //                 script{
