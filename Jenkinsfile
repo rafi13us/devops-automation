@@ -18,13 +18,13 @@ pipeline {
               }
             }
           }
-        stage('Quality Gate') {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: false
-              }
-            }
-          }
+//         stage('Quality Gate') {
+//             steps {
+//               timeout(time: 1, unit: 'HOURS') {
+//                 waitForQualityGate abortPipeline: false
+//               }
+//             }
+//           }
         stage('Build docker image'){
             steps{
                 script{
@@ -59,7 +59,13 @@ pipeline {
             }
         }
         stage('Stage Deploy'){
+             when {
+                expression {
+                    condition1 == "YES"
+                }
+             }
             steps{
+                input message: 'Proceed with this step?', submitter: "${approvers}"
                 script{
                     sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-Stage.yaml'
                 }
