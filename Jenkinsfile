@@ -46,37 +46,31 @@ pipeline {
              steps {
               script {
                 env.selected_environment = input  message: 'Select environment to Deploy',ok : 'Proceed',id :'tag_id',
-                parameters:[choice(choices: ['DEV', 'STAGE', 'PROD'], description: 'Select environment', name: 'env')]
+                parameters:[choice(choices: ['Dev', 'Stage', 'Prod'], description: 'Select environment', name: 'env')]
                 echo "Deploying in ${env.selected_environment}."
             }
          }
       }
-       stage('Dev Deploy'){
+       stage(' Deploying in selected environment'){
             steps{
                 script{
-                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-Dev.yaml'
+                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-${env.selected_environment}.yaml'
                 }
             }
         }
-        stage('Stage Deploy'){
-             when {
-                expression {
-                    condition1 == "YES"
-                }
-             }
-            steps{
-                input message: 'Proceed with this step?', submitter: "${approvers}"
-                script{
-                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-Stage.yaml'
-                }
-            }
-        }
-        stage('Prod Deploy'){
-            steps{
-                script{
-                    sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-Prod.yaml'
-                }
-            }
-        }
+//         stage('Stage Deploy'){
+//             steps{
+//                 script{
+//                     sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-Stage.yaml'
+//                 }
+//             }
+//         }
+//         stage('Prod Deploy'){
+//             steps{
+//                 script{
+//                     sh 'kubectl apply -f /Users/shaikfahemida/desktop/springboot-firstapp/deploymentservice-Prod.yaml'
+//                 }
+//             }
+//         }
     }
 }
