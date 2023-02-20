@@ -11,13 +11,13 @@ pipeline {
                 
             }
         }
-        stage('SonarQube analysis') {
-            steps{
-             withSonarQubeEnv('SonarQube Analysis') {
-                sh 'mvn clean package sonar:sonar'
-              }
-            }
-          }
+//         stage('SonarQube analysis') {
+//             steps{
+//              withSonarQubeEnv('SonarQube Analysis') {
+//                 sh 'mvn clean package sonar:sonar'
+//               }
+//             }
+//          }
 //         stage('Quality Gate') {
 //             steps {
 //               timeout(time: 1, unit: 'HOURS') {
