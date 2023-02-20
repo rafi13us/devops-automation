@@ -14,7 +14,8 @@ pipeline {
         stage('SonarQube') {
             steps{
              withSonarQubeEnv('SonarQube') {
-                sh 'mvn clean package sonar:sonar'
+                   sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=rafi13us_devops-automation'               
+                 //sh 'mvn clean package sonar:sonar'
               }
             }
          }
